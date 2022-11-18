@@ -1,21 +1,18 @@
-import { StyleSheet, View } from "react-native";
+import { Button, Text } from "@rneui/themed";
 import React, { useState } from "react";
-import { Text } from "@rneui/themed";
-
-import { Container, CustomTextInput, DateTimeSelector } from "../components";
-import { Button } from "@rneui/themed";
-
-import DateTimePicker from "@react-native-community/datetimepicker";
+import { View } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 
-const AdminHome = () => {
+import { Container, CustomTextInput, DateTimeSelector } from "../components";
+
+const CreateProject = () => {
   const [name, setName] = React.useState("");
   const [desc, setDesc] = React.useState("");
   const [startDate, setStartDate] = React.useState(new Date());
   const [endDate, setEndDate] = React.useState(new Date());
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState([]);
-  
+
   const [items, setItems] = useState([
     { label: "Apple", value: "apple" },
     { label: "Banana", value: "banana" },
@@ -33,7 +30,6 @@ const AdminHome = () => {
       endDate: endDate.getTime(),
       value,
     };
-    console.log(project);
   };
 
   return (
@@ -41,13 +37,13 @@ const AdminHome = () => {
       <Text h4>Create Project</Text>
       <CustomTextInput
         placeholder={"Task name"}
-        values={name}
-        setValues={setName}
+        value={name}
+        setValue={setName}
       />
       <CustomTextInput
         placeholder={"Task description"}
-        values={desc}
-        setValues={setDesc}
+        value={desc}
+        setValue={setDesc}
       />
       <DateTimeSelector
         label={"Start date"}
@@ -84,6 +80,4 @@ const AdminHome = () => {
   );
 };
 
-export default AdminHome;
-
-const styles = StyleSheet.create({});
+export default CreateProject;

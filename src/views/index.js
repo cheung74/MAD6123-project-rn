@@ -1,4 +1,5 @@
-import AdminHome from "./AdminHome";
+import CreateProject from "./CreateProject";
+import CreateTasks from "./CreateTasks";
 import Login from "./Login";
 
-export { Login, AdminHome };
+export { Login, CreateProject, CreateTasks };

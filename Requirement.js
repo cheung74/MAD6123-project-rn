@@ -4,8 +4,11 @@
 
 // Only Admin user can create a project and assign members to a project and has all the rights/permissions to create the following:
 
-// Project tasks (task id, task name, task description, task start date, task end date)
+// Project tasks (task id, task name, task description, task start date, task end date) 
+//done
+
 // Assign members to created tasks (every member can be paid a different hourly rate, so please assign this as well).
+//
 // Assigned members can check when the task is complete. In this case, application records the date and time of completion. Members should also enter the hours they worked in this task.
 // Some tasks can have prerequisite tasks which means they cannot start before another task is completed. Make sure to consider this.
 // When all the tasks in a project are complete, application should mark the project as complete and record total number of hours members worked on it and the cost of the whole project.
