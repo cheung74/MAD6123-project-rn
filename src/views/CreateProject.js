@@ -71,10 +71,11 @@ const CreateProject = () => {
             mode="BADGE"
             itemKey="value"
             itemSeparator={true}
+            dropDownDirection="TOP"
           />
         </View>
       </View>
-      <View style={{ marginTop: "auto" }} />
+
       <Button onPress={handleSubmit}>Submit</Button>
     </Container>
   );
