@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
-import { Container, CustomTextInput } from "../components";
+import { Container, CustomText } from "../components";
 
 const Login = () => {
   const [username, setUserName] = React.useState("");
@@ -9,16 +9,17 @@ const Login = () => {
   const navigation = useNavigation();
 
   const handleLogin = () => {
-    navigation.navigate("AdminHome");
+    navigation.navigate("RootTab");
   };
+
   return (
     <Container>
-      <CustomTextInput
-        placeholder="Username"
+      <CustomText
         value={username}
         setValue={setUserName}
+        placeholder="Username"
       />
-      <CustomTextInput
+      <CustomText
         placeholder="Password"
         value={password}
         setValue={setPassword}
