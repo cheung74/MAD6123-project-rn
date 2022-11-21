@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { TouchableOpacity } from "react-native";
-import { CreateTasks, AdminHome, CreateUser } from "../views";
+import { CreateTasks, AdminProjects, CreateUser } from "../views";
 import { Ionicons } from "@expo/vector-icons";
 
 const Stack = createNativeStackNavigator();
@@ -22,14 +22,14 @@ const AdminProjectStack = () => {
     >
       <Stack.Screen
         name="adminProject"
-        component={AdminHome}
+        component={AdminProjects}
         options={{ title: "Projects" }}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="createUser"
         component={CreateUser}
         options={{ title: "Create new user" }}
-      />
+      /> */}
     </Stack.Navigator>
   );
 };

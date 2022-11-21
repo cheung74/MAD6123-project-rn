@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Container } from "../components";
 
-const AdminTasks = () => {
+const AdminProjects = () => {
   const navigation = useNavigation();
   // const users = [
   //   {
@@ -66,7 +66,7 @@ const AdminTasks = () => {
   );
 };
 
-export default AdminTasks;
+export default AdminProjects;
 
 const styles = StyleSheet.create({
   text: {

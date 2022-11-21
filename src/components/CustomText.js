@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { CustomTextInput } from "../components";
+import CustomTextInput from "./CustomTextInput";
 
 const CustomText = ({ value, placeholder, setValue, editable = true }) => {
   return (
