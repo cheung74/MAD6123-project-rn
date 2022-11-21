@@ -30,9 +30,13 @@ const AdminProjects = () => {
   //     title: "manager",
   //   },
   // ];
+  const handleNewProject = () => {
+    navigation.navigate("createProject");
+  };
   return (
     <Container>
       <Text>Tasks Screen</Text>
+      <Button onPress={handleNewProject}>Create new project</Button>
       {/* <FlatList
         ListHeaderComponent={() => (
           <View style={{ flexDirection: "row" }}>

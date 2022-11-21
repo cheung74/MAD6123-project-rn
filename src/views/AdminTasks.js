@@ -30,9 +30,13 @@ const AdminTasks = () => {
   //     title: "manager",
   //   },
   // ];
+  const handleNewTask = () => {
+    
+  }
   return (
     <Container>
       <Text>Tasks Screen</Text>
+      <Button>Create new task</Button>
       {/* <FlatList
         ListHeaderComponent={() => (
           <View style={{ flexDirection: "row" }}>

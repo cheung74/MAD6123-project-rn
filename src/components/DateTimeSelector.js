@@ -5,7 +5,6 @@ import { Text } from "@rneui/themed";
 import moment from "moment";
 
 const DateTimeSelector = ({ label, val, setVal, minimumDate }) => {
-  
   const onChange = (event, date) => {
     const selectedValue = date || new Date();
     setVal(selectedValue);
@@ -13,9 +12,7 @@ const DateTimeSelector = ({ label, val, setVal, minimumDate }) => {
 
   return (
     <View style={styles.container}>
-      <Text h4 style={{ paddingRight: 8 }}>
-        {label} :
-      </Text>
+      <Text style={{ paddingRight: 8, fontSize: 18 }}>{label} :</Text>
       <DateTimePicker
         value={val}
         mode="datetime"

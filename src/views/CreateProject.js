@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 
-import { Container, CustomTextInput, DateTimeSelector } from "../components";
+import { Container, CustomText, DateTimeSelector } from "../components";
 
 const CreateProject = () => {
   const [name, setName] = React.useState("");
@@ -35,12 +35,8 @@ const CreateProject = () => {
   return (
     <Container>
       <Text h4>Create Project</Text>
-      <CustomTextInput
-        placeholder={"Task name"}
-        value={name}
-        setValue={setName}
-      />
-      <CustomTextInput
+      <CustomText placeholder={"Task name"} value={name} setValue={setName} />
+      <CustomText
         placeholder={"Task description"}
         value={desc}
         setValue={setDesc}
