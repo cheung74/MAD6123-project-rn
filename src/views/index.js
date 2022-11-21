@@ -5,12 +5,14 @@ import Login from "./Login";
 import Projects from "./Projects";
 import Tasks from "./Tasks";
 import CreateUser from "./CreateUser";
+import AdminTasks from "./AdminTasks";
 
 export {
   Login,
   CreateProject,
   CreateTasks,
   AdminHome,
+  AdminTasks,
   Projects,
   Tasks,
   CreateUser,

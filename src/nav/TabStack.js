@@ -4,6 +4,8 @@ import { Home, Tasks, Projects } from "../views";
 import { Ionicons } from "@expo/vector-icons";
 
 import AdminHomeStack from "./AdminHomeStack";
+import AdminTaskStack from "./AdminTaskStack";
+import AdminProjectStack from "./AdminProjectStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -32,8 +34,8 @@ const TabStack = () => {
       })}
     >
       <Tab.Screen name="home" component={AdminHomeStack} />
-      <Tab.Screen name="tasks" component={Tasks} />
-      <Tab.Screen name="projects" component={Projects} />
+      <Tab.Screen name="tasks" component={AdminTaskStack} />
+      <Tab.Screen name="projects" component={AdminProjectStack} />
     </Tab.Navigator>
   );
 };
