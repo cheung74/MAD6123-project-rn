@@ -25,11 +25,11 @@ const AdminTaskStack = () => {
         component={AdminTasks}
         options={{ title: "Tasks" }}
       />
-      {/* <Stack.Screen
-        name="createUser"
-        component={CreateUser}
+      <Stack.Screen
+        name="createNewTask"
+        component={CreateTasks}
         options={{ title: "Create new task" }}
-      /> */}
+      />
     </Stack.Navigator>
   );
 };
