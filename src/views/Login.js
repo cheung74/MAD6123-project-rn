@@ -2,23 +2,30 @@ import React from "react";
 import { Button } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 import { Container, CustomText } from "../components";
+import { login as auth } from "../services/auth";
+import { storeLocalUserData } from "../storages/asyncStorage";
 
 const Login = () => {
-  const [username, setUserName] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [email, setEmail] = React.useState("admin@admin.com");
+  const [password, setPassword] = React.useState("admin");
   const navigation = useNavigation();
 
   const handleLogin = () => {
-    navigation.navigate("RootTab");
+    login();
+  };
+
+  const login = async () => {
+    const _user = await auth(email, password);
+    if (_user) {
+      //save to local
+      await storeLocalUserData(_user);
+      await navigation.navigate("RootTab");
+    }
   };
 
   return (
     <Container>
-      <CustomText
-        value={username}
-        setValue={setUserName}
-        placeholder="Username"
-      />
+      <CustomText value={email} setValue={setEmail} placeholder="Email" />
       <CustomText
         placeholder="Password"
         value={password}

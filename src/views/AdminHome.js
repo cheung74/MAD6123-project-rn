@@ -9,27 +9,31 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Container } from "../components";
+import { getUsers } from "../services/user";
 
 const AdminHome = () => {
   const navigation = useNavigation();
-  const users = [
-    {
-      username: "abc",
-      email: "123@gmail.com",
-      firstName: "123123",
-      lastName: "abcc",
-      id: "1",
-      title: "manager",
-    },
-    {
-      username: "bb",
-      id: "2",
-      email: "123@gmail.com",
-      firstName: "123123",
-      lastName: "abcc",
-      title: "manager",
-    },
-  ];
+  const [list, setList] = React.useState([]);
+
+  React.useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      fetchUsers();
+    });
+  }, []);
+
+  const fetchUsers = async () => {
+    const _list = await getUsers();
+    setList(_list);
+  };
+
+  const handleItem = (item) => {
+    navigation.navigate("editUser", { item });
+  };
+
   return (
     <Container>
       <FlatList
@@ -45,20 +49,23 @@ const AdminHome = () => {
             </Button>
           </View>
         )}
-        data={users}
+        data={list}
         style={{ flex: 1, width: "100%", padding: 16 }}
-        keyExtractor={({ id }) => id}
+        keyExtractor={({ _id }) => _id}
         ItemSeparatorComponent={() => (
           <View style={{ height: 1.5, backgroundColor: "lightgray" }} />
         )}
         renderItem={({ item }) => (
-          <View style={{ padding: 16 }}>
-            <Text style={styles.text}>User name: {item.username}</Text>
+          <TouchableOpacity
+            style={{ padding: 16 }}
+            onPress={() => handleItem(item)}
+          >
             <Text style={styles.text}>First name: {item.firstName}</Text>
             <Text style={styles.text}>Last name: {item.lastName}</Text>
             <Text style={styles.text}>Email: {item.email}</Text>
             <Text style={styles.text}>Job title: {item.title}</Text>
-          </View>
+            <Text style={styles.text}>Password: {item.password}</Text>
+          </TouchableOpacity>
         )}
       />
     </Container>

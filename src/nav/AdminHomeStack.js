@@ -30,6 +30,11 @@ const AdminHomeStack = () => {
         component={CreateUser}
         options={{ title: "Create new user" }}
       />
+      <Stack.Screen
+        name="editUser"
+        component={CreateUser}
+        options={{ title: "Edit user" }}
+      />
     </Stack.Navigator>
   );
 };

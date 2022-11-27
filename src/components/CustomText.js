@@ -4,7 +4,7 @@ import CustomTextInput from "./CustomTextInput";
 
 const CustomText = ({ value, placeholder, setValue, editable = true }) => {
   return (
-    <View style={{ width: "100%", padding: 16 }}>
+    <View style={{ width: "100%", padding: 8 }}>
       <Text style={styles.text}>{placeholder}</Text>
       <CustomTextInput
         value={value}
