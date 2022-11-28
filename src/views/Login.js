@@ -10,7 +10,7 @@ const Login = () => {
   const [password, setPassword] = React.useState("admin");
   const navigation = useNavigation();
 
-  React.useEffect(async () => {
+  React.useEffect(() => {
     checkCurrentUser();
   }, []);
 

@@ -7,6 +7,7 @@ import Tasks from "./Tasks";
 import CreateUser from "./CreateUser";
 import AdminTasks from "./AdminTasks";
 import AdminProjects from "./AdminProjects";
+import AdminProjectDetails from "./AdminProjectDetails";
 
 export {
   Login,
@@ -18,4 +19,5 @@ export {
   Tasks,
   CreateUser,
   AdminProjects,
+  AdminProjectDetails,
 };

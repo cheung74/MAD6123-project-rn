@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Container } from "../components";
-import { getTasks } from "../services/project";
+import { getDateString } from "../helper";
+import { getProjects } from "../services/project";
 
 const AdminProjects = () => {
   const navigation = useNavigation();
@@ -23,12 +24,22 @@ const AdminProjects = () => {
     navigation.navigate("createProject");
   };
 
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      getList();
+    });
+  }, []);
+
   const getList = React.useCallback(async () => {
-    const result = await getTasks();
+    const result = await getProjects();
     if (Array.isArray(result)) {
       setList(result);
     }
   }, []);
+
+  const handleItemOnPress = (item) => {
+    navigation.navigate("projectDetail", { item });
+  };
 
   return (
     <Container>
@@ -41,18 +52,31 @@ const AdminProjects = () => {
         )}
         data={list}
         style={{ flex: 1, width: "100%", padding: 16 }}
-        keyExtractor={({ id }) => id}
+        keyExtractor={({ _id }) => _id}
         ItemSeparatorComponent={() => (
           <View style={{ height: 1.5, backgroundColor: "lightgray" }} />
         )}
         renderItem={({ item }) => (
-          <View style={{ padding: 16 }}>
+          <TouchableOpacity
+            style={{ padding: 16 }}
+            onPress={() => handleItemOnPress(item)}
+          >
             <Text style={styles.text}>Project name: {item.name}</Text>
-            <Text style={styles.text}>Start Date: {item.startDate}</Text>
-            <Text style={styles.text}>Last name: {item.lastName}</Text>
-            <Text style={styles.text}>Email: {item.email}</Text>
-            <Text style={styles.text}>Job title: {item.title}</Text>
-          </View>
+            <Text style={styles.text}>
+              Start Date: {getDateString(item.startDate)}
+            </Text>
+            <Text style={styles.text}>
+              End Date: {getDateString(item.endDate)}
+            </Text>
+            <Text style={styles.text}>
+              Assignee:{" "}
+              {item.assignee
+                .map((item) => {
+                  return item.firstName + " " + item.lastName;
+                })
+                .join(", ")}
+            </Text>
+          </TouchableOpacity>
         )}
       />
     </Container>

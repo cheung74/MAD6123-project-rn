@@ -1,11 +1,18 @@
-import { StyleSheet, View } from "react-native";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import React from "react";
 import DropDownPicker from "react-native-dropdown-picker";
 
 import { Button, Text } from "@rneui/themed";
 import { Container, CustomText, DateTimeSelector } from "../components";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { createTask } from "../services/project";
 
 const CreateTasks = () => {
+  const route = useRoute();
+  const { params } = route;
+  const navigation = useNavigation();
+  const item = params.item;
+  // console.log(item);
   const [name, setName] = React.useState("");
   const [desc, setDesc] = React.useState("");
   const [rate, setRate] = React.useState("");
@@ -13,30 +20,38 @@ const CreateTasks = () => {
   const [open, setOpen] = React.useState(false);
 
   const [value, setValue] = React.useState([]);
-  const [items, setItems] = React.useState([
-    { label: "Task1", value: "task1" },
-    { label: "Task2", value: "task2" },
-  ]);
+  const [items, setItems] = React.useState([]);
 
   const [open2, setOpen2] = React.useState(false);
-  const [assignee, setAssignee] = React.useState([]);
+  const [assignee, setAssignee] = React.useState("");
 
-  const [users, setUsers] = React.useState([
-    { label: "abc", value: "abc" },
-    { label: "abbc", value: "abbc" },
-  ]);
+  const [users, setUsers] = React.useState(
+    item.assignee.map((item) => {
+      return {
+        label: item.firstName + " " + item.lastName,
+        value: item,
+      };
+    })
+  );
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    const projectId = item._id;
     const data = {
+      id: projectId + new Date().getTime(),
       name,
       desc,
       rate,
+      assignee,
     };
+    const result = await createTask(projectId, data);
+    if (result.status === "success") {
+      navigation.navigate("adminProject");
+    }
   };
+
   return (
     <Container>
-      <Text h4>Create Tasks</Text>
-      <Text h4>Project: "projectName"</Text>
+      <Text h4>Project: {item.name}</Text>
 
       <CustomText
         placeholder={"Sub-task name"}
@@ -52,7 +67,26 @@ const CreateTasks = () => {
 
       <CustomText placeholder={"Hourly rate"} value={rate} setValue={setRate} />
       <View>
-        <View style={{ width: "90%", padding: 8 }}>
+        <Text style={{ paddingLeft: 8, fontSize: 16 }}>Assignee</Text>
+        <View style={{ width: "96%", padding: 8 }}>
+          <DropDownPicker
+            dropDownDirection="TOP"
+            open={open2}
+            value={assignee}
+            items={users}
+            setOpen={setOpen2}
+            setValue={setAssignee}
+            setItems={setUsers}
+            itemKey="label"
+            placeholder="Select Assignee"
+            mode="BADGE"
+            itemSeparator={true}
+          />
+        </View>
+      </View>
+      <View>
+        <Text style={{ paddingLeft: 8, fontSize: 16 }}>Prerequisite task</Text>
+        <View style={{ width: "96%", padding: 8 }}>
           <DropDownPicker
             dropDownDirection="TOP"
             open={open}
@@ -63,10 +97,8 @@ const CreateTasks = () => {
             setItems={setItems}
             placeholder="Prerequisite task"
             mode="BADGE"
+            itemKey="label"
             itemSeparator={true}
-            multiple={true}
-            min={0}
-            max={5}
           />
         </View>
       </View>

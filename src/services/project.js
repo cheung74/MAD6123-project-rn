@@ -1,12 +1,30 @@
 import { baseUrl } from "./constant";
 
-const TASK = "tasks";
 const PROJECTS = "projects";
+const TASKS = "task";
 
-export const getTasks = async () => {
+export const getProjects = async () => {
   try {
-    const url = baseUrl + TASK;
+    const url = baseUrl + PROJECTS;
     const res = await fetch(url);
+    const result = await res.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const createTask = async (projectId, task) => {
+  try {
+    const url = baseUrl + TASKS + "/" + projectId;
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(task),
+    });
     const result = await res.json();
     return result;
   } catch (error) {
@@ -27,7 +45,6 @@ export const createProject = async (project) => {
     });
     const result = await res.json();
     return result;
-    
   } catch (error) {
     console.log(error);
   }

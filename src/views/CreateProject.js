@@ -50,6 +50,7 @@ const CreateProject = () => {
       startDate: startDate.getTime(),
       endDate: endDate.getTime(),
       assignee: value,
+      tasks: [],
     };
     const result = await createProject(project);
     if (result.status === "success") {
