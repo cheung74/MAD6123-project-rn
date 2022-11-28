@@ -16,8 +16,10 @@ const Login = () => {
 
   const checkCurrentUser = async () => {
     const user = await getLocalUserData();
-    if (user) {
+    if (user && user.type === "admin") {
       await navigation.navigate("RootTab");
+    } else if (user && user.type === "user") {
+      await navigation.navigate("UserPage");
     }
   };
 
@@ -31,10 +33,9 @@ const Login = () => {
       //save to local
       const result = await storeLocalUserData(_user);
       if (result) {
-        if (_user.type === "admin"){
+        if (_user.type === "admin") {
           await navigation.navigate("RootTab");
-        }
-        else{
+        } else {
           await navigation.navigate("UserPage");
         }
       }
