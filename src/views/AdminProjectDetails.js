@@ -11,10 +11,6 @@ const AdminProjectDetails = () => {
   const navigation = useNavigation();
   const { params } = route;
   const item = params.item;
-  console.log(item);
-  React.useEffect(() => {
-    // getList();
-  }, []);
 
   return (
     <View style={styles.container}>
@@ -44,6 +40,13 @@ const AdminProjectDetails = () => {
               navigation.navigate("createNewTask", { item });
             }}
           />
+          <View style={{ height: 15 }} />
+          <Button
+            title={"Add assignee"}
+            onPress={() => {
+              navigation.navigate("addAssignee", { item });
+            }}
+          />
         </View>
       </View>
       <Text style={{ fontWeight: "bold" }}>Tasks</Text>
@@ -56,6 +59,11 @@ const AdminProjectDetails = () => {
         renderItem={({ item }) => (
           <View>
             <Text style={styles.text}>Task name: {item.name}</Text>
+            <Text style={styles.text}>
+              Prerequisite task:{" "}
+              {(item.prerequisite && item.prerequisite.name) || ""}
+            </Text>
+
             <Text style={styles.text}>Task Desc: {item.desc}</Text>
             <Text style={styles.text}>Task hour rate: ${item.rate}</Text>
             <Text style={styles.text}>
@@ -73,6 +81,7 @@ export default AdminProjectDetails;
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+    flex: 1,
   },
   text: {
     paddingVertical: 8,

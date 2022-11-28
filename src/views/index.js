@@ -8,7 +8,7 @@ import CreateUser from "./CreateUser";
 import AdminTasks from "./AdminTasks";
 import AdminProjects from "./AdminProjects";
 import AdminProjectDetails from "./AdminProjectDetails";
-
+import AddAssignee from "./AddAssignee";
 export {
   Login,
   CreateProject,
@@ -20,4 +20,5 @@ export {
   CreateUser,
   AdminProjects,
   AdminProjectDetails,
+  AddAssignee,
 };

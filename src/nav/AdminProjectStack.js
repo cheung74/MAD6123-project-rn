@@ -6,6 +6,7 @@ import {
   CreateUser,
   CreateProject,
   AdminProjectDetails,
+  AddAssignee,
 } from "../views";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -53,6 +54,11 @@ const AdminProjectStack = () => {
         name="createNewTask"
         options={{ title: "New Task" }}
         component={CreateTasks}
+      />
+      <Stack.Screen
+        name="addAssignee"
+        component={AddAssignee}
+        options={{ title: "Add Assignee" }}
       />
     </Stack.Navigator>
   );

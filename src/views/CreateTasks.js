@@ -12,36 +12,43 @@ const CreateTasks = () => {
   const { params } = route;
   const navigation = useNavigation();
   const item = params.item;
-  // console.log(item);
+  console.log(item);
   const [name, setName] = React.useState("");
   const [desc, setDesc] = React.useState("");
   const [rate, setRate] = React.useState("");
 
   const [open, setOpen] = React.useState(false);
 
-  const [value, setValue] = React.useState([]);
-  const [items, setItems] = React.useState([]);
+  const [value, setValue] = React.useState("");
+
+  //
+  const [items, setItems] = React.useState(
+    item.task.length > 0
+      ? item.task.map((item) => ({ label: item.name, value: item.id }))
+      : []
+  );
 
   const [open2, setOpen2] = React.useState(false);
   const [assignee, setAssignee] = React.useState("");
 
   const [users, setUsers] = React.useState(
-    item.assignee.map((item) => {
-      return {
-        label: item.firstName + " " + item.lastName,
-        value: item,
-      };
-    })
+    item.assignee.map((item) => ({
+      label: item.firstName + " " + item.lastName,
+      value: item,
+    }))
   );
 
   const handleSubmit = async () => {
     const projectId = item._id;
+    const preTask = value ? item.task.find((item) => item.id === value) : null;
     const data = {
       id: projectId + new Date().getTime(),
       name,
       desc,
       rate,
       assignee,
+      prerequisite: preTask,
+      status: "initialized",
     };
     const result = await createTask(projectId, data);
     if (result.status === "success") {

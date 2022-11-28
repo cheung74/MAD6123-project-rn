@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { Button, Text } from "@rneui/themed";
 import React from "react";
 import { View } from "react-native";
@@ -50,7 +50,8 @@ const CreateProject = () => {
       startDate: startDate.getTime(),
       endDate: endDate.getTime(),
       assignee: value,
-      tasks: [],
+      task: [],
+      status: "initialized",
     };
     const result = await createProject(project);
     if (result.status === "success") {

@@ -32,6 +32,24 @@ export const createTask = async (projectId, task) => {
   }
 };
 
+export const updateProject = async (id, project) => {
+  try {
+    const url = baseUrl + PROJECTS + "/" + id;
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(project),
+    });
+    const result = await res.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const createProject = async (project) => {
   try {
     const url = baseUrl + PROJECTS;

@@ -11,12 +11,7 @@ const CreateUser = () => {
   const navigation = useNavigation();
   const { params } = route;
 
-  const editUser = params.item;
-  const isEdit = React.useMemo(() => {
-    if (params.item) {
-      return params.item;
-    }
-  }, [params.item]);
+  const editUser = params && params.item ? params.item : null;
 
   const [email, setEmail] = React.useState(editUser ? editUser.email : "");
   const [fName, setFname] = React.useState(editUser ? editUser.firstName : "");
@@ -28,7 +23,7 @@ const CreateUser = () => {
 
   const [open, setOpen] = React.useState(false);
 
-  const [type, setType] = React.useState(editUser ? editUser.type : "");
+  const [type, setType] = React.useState(editUser ? editUser.type : "user");
 
   const [items, setItems] = React.useState([
     { label: "Admin", value: "admin" },
@@ -44,6 +39,7 @@ const CreateUser = () => {
       type,
       title,
     };
+    console.log(user)
     const res = await createUser(user);
     if (res) {
       await navigation.goBack();
@@ -98,8 +94,8 @@ const CreateUser = () => {
           itemSeparator={true}
         />
       </View>
-      <Button onPress={!isEdit ? handleSubmit : handleEdit}>
-        {!isEdit ? "Submit" : "Edit user"}
+      <Button onPress={!editUser ? handleSubmit : handleEdit}>
+        {!editUser ? "Submit" : "Edit user"}
       </Button>
     </Container>
   );
