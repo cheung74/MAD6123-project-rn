@@ -2,11 +2,20 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { TouchableOpacity } from "react-native";
 import { CreateTasks, AdminHome, CreateUser } from "../views";
 import { Ionicons } from "@expo/vector-icons";
+import { clearLocalUserData } from "../storages/asyncStorage";
+import { useNavigation } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();
 
 const AdminHomeStack = () => {
-  const handleLogout = async () => {};
+  const navigation = useNavigation();
+  const handleLogout = async () => {
+    const result = await clearLocalUserData();
+    if (result) {
+      await navigation.navigate("Auth");
+    }
+  };
+
   return (
     <Stack.Navigator
       initialRouteName="adminHome"

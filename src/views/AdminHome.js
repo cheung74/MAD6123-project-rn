@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Container } from "../components";
-import { getUsers } from "../services/user";
+import { getAllUsers } from "../services/user";
 
 const AdminHome = () => {
   const navigation = useNavigation();
@@ -26,7 +26,7 @@ const AdminHome = () => {
   }, []);
 
   const fetchUsers = async () => {
-    const _list = await getUsers();
+    const _list = await getAllUsers();
     setList(_list);
   };
 
@@ -60,6 +60,7 @@ const AdminHome = () => {
             style={{ padding: 16 }}
             onPress={() => handleItem(item)}
           >
+            <Text style={styles.text}>User type: {item.type}</Text>
             <Text style={styles.text}>First name: {item.firstName}</Text>
             <Text style={styles.text}>Last name: {item.lastName}</Text>
             <Text style={styles.text}>Email: {item.email}</Text>

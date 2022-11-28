@@ -9,48 +9,37 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Container } from "../components";
+import { getTasks } from "../services/project";
 
 const AdminProjects = () => {
   const navigation = useNavigation();
-  // const users = [
-  //   {
-  //     username: "abc",
-  //     email: "123@gmail.com",
-  //     firstName: "123123",
-  //     lastName: "abcc",
-  //     id: "1",
-  //     title: "manager",
-  //   },
-  //   {
-  //     username: "bb",
-  //     id: "2",
-  //     email: "123@gmail.com",
-  //     firstName: "123123",
-  //     lastName: "abcc",
-  //     title: "manager",
-  //   },
-  // ];
+  const [list, setList] = React.useState([]);
+
+  React.useEffect(() => {
+    getList();
+  }, []);
+
   const handleNewProject = () => {
     navigation.navigate("createProject");
   };
+
+  const getList = React.useCallback(async () => {
+    const result = await getTasks();
+    if (Array.isArray(result)) {
+      setList(result);
+    }
+  }, []);
+
   return (
     <Container>
-      <Text>Tasks Screen</Text>
-      <Button onPress={handleNewProject}>Create new project</Button>
-      {/* <FlatList
+      <FlatList
         ListHeaderComponent={() => (
           <View style={{ flexDirection: "row" }}>
             <View style={{ marginLeft: "auto" }} />
-            <Button
-              onPress={() => {
-                navigation.navigate("createUser");
-              }}
-            >
-              Create user
-            </Button>
+            <Button onPress={handleNewProject}>Create new project</Button>
           </View>
         )}
-        data={users}
+        data={list}
         style={{ flex: 1, width: "100%", padding: 16 }}
         keyExtractor={({ id }) => id}
         ItemSeparatorComponent={() => (
@@ -58,14 +47,14 @@ const AdminProjects = () => {
         )}
         renderItem={({ item }) => (
           <View style={{ padding: 16 }}>
-            <Text style={styles.text}>User name: {item.username}</Text>
-            <Text style={styles.text}>First name: {item.firstName}</Text>
+            <Text style={styles.text}>Project name: {item.name}</Text>
+            <Text style={styles.text}>Start Date: {item.startDate}</Text>
             <Text style={styles.text}>Last name: {item.lastName}</Text>
             <Text style={styles.text}>Email: {item.email}</Text>
             <Text style={styles.text}>Job title: {item.title}</Text>
           </View>
         )}
-      /> */}
+      />
     </Container>
   );
 };

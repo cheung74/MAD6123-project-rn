@@ -3,12 +3,23 @@ import { Button } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 import { Container, CustomText } from "../components";
 import { login as auth } from "../services/auth";
-import { storeLocalUserData } from "../storages/asyncStorage";
+import { getLocalUserData, storeLocalUserData } from "../storages/asyncStorage";
 
 const Login = () => {
   const [email, setEmail] = React.useState("admin@admin.com");
   const [password, setPassword] = React.useState("admin");
   const navigation = useNavigation();
+
+  React.useEffect(async () => {
+    checkCurrentUser();
+  }, []);
+
+  const checkCurrentUser = async () => {
+    const user = await getLocalUserData();
+    if (user) {
+      await navigation.navigate("RootTab");
+    }
+  };
 
   const handleLogin = () => {
     login();
@@ -18,8 +29,10 @@ const Login = () => {
     const _user = await auth(email, password);
     if (_user) {
       //save to local
-      await storeLocalUserData(_user);
-      await navigation.navigate("RootTab");
+      const result = await storeLocalUserData(_user);
+      if (result) {
+        await navigation.navigate("RootTab");
+      }
     }
   };
 

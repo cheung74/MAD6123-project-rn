@@ -13,7 +13,7 @@ const TabStack = () => {
   const handleLogout = async () => {};
   return (
     <Tab.Navigator
-      initialRouteName="home"
+      initialRouteName="projects"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;

@@ -2,12 +2,23 @@ import { baseUrl } from "./constant";
 
 const USER = "users/";
 
-export const getUsers = async () => {
+export const getAllUsers = async () => {
   try {
     const url = baseUrl + USER;
     const res = await fetch(url);
     const result = await res.json();
     return result;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getUsers = async () => {
+  try {
+    const url = baseUrl + USER;
+    const res = await fetch(url);
+    const result = await res.json();
+    return result.filter((item) => item.type === "user");
   } catch (err) {
     console.error(err);
   }

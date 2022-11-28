@@ -1,40 +1,64 @@
+import { useNavigation } from "@react-navigation/native";
 import { Button, Text } from "@rneui/themed";
-import React, { useState } from "react";
+import React from "react";
 import { View } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 
 import { Container, CustomText, DateTimeSelector } from "../components";
+import { createProject } from "../services/project";
+import { getUsers } from "../services/user";
 
 const CreateProject = () => {
   const [name, setName] = React.useState("");
   const [desc, setDesc] = React.useState("");
   const [startDate, setStartDate] = React.useState(new Date());
   const [endDate, setEndDate] = React.useState(new Date());
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState([]);
-
-  const [items, setItems] = useState([
-    { label: "Apple", value: "apple" },
-    { label: "Banana", value: "banana" },
-  ]);
-
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState([]);
+  const [userList, setUserList] = React.useState([]);
+  const [items, setItems] = React.useState([]);
+  const navigation = useNavigation();
   const handleSetEndDate = (date) => {
     setEndDate(date);
   };
 
-  const handleSubmit = () => {
+  React.useEffect(() => {
+    getUserList();
+  }, []);
+
+  React.useEffect(() => {
+    const _item = userList.map((item) => {
+      return {
+        label: item.firstName + " " + item.lastName,
+        value: item,
+      };
+    });
+    setItems(_item);
+  }, [userList]);
+
+  const getUserList = React.useCallback(async () => {
+    const list = await getUsers();
+    if (Array.isArray(list)) {
+      setUserList(list);
+    }
+  }, []);
+
+  const handleSubmit = async () => {
     const project = {
       name,
       desc,
       startDate: startDate.getTime(),
       endDate: endDate.getTime(),
-      value,
+      assignee: value,
     };
+    const result = await createProject(project);
+    if (result.status === "success") {
+      navigation.goBack();
+    }
   };
 
   return (
     <Container>
-      <Text h4>Create Project</Text>
       <CustomText placeholder={"Task name"} value={name} setValue={setName} />
       <CustomText
         placeholder={"Task description"}
@@ -63,9 +87,9 @@ const CreateProject = () => {
             setItems={setItems}
             multiple={true}
             min={0}
-            placeholder="Assign values"
+            placeholder="Assignee"
             mode="BADGE"
-            itemKey="value"
+            itemKey="label"
             itemSeparator={true}
             dropDownDirection="TOP"
           />
