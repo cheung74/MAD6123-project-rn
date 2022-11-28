@@ -8,6 +8,7 @@ const CustomTextInput = ({ value, placeholder, setValue, editable = true }) => {
       placeholder={placeholder}
       value={value}
       onChangeText={setValue}
+      autoCapitalize="none"
       editable={editable}
     />
   );
