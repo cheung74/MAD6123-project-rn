@@ -31,7 +31,12 @@ const Login = () => {
       //save to local
       const result = await storeLocalUserData(_user);
       if (result) {
-        await navigation.navigate("RootTab");
+        if (_user.type === "admin"){
+          await navigation.navigate("RootTab");
+        }
+        else{
+          await navigation.navigate("UserPage");
+        }
       }
     }
   };

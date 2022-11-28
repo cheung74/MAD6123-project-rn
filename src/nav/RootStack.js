@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import AuthStack from "./AuthStack";
 import TabStack from "./TabStack";
+import UserPage from "../views/UserPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -12,6 +13,7 @@ const RootStack = () => {
     >
       <Stack.Screen name="Auth" component={AuthStack} />
       <Stack.Screen name="RootTab" component={TabStack} />
+      <Stack.Screen name="UserPage" component={UserPage} />
     </Stack.Navigator>
   );
 };
