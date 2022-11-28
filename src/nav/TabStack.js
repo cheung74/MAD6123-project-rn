@@ -34,7 +34,7 @@ const TabStack = () => {
       })}
     >
       <Tab.Screen name="home" component={AdminHomeStack} />
-      <Tab.Screen name="tasks" component={AdminTaskStack} />
+      {/* <Tab.Screen name="tasks" component={AdminTaskStack} /> */}
       <Tab.Screen name="projects" component={AdminProjectStack} />
     </Tab.Navigator>
   );

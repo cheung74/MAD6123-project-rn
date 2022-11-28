@@ -51,6 +51,7 @@ const CreateProject = () => {
       endDate: endDate.getTime(),
       assignee: value,
       task: [],
+      cost: "0",
       status: "initialized",
     };
     const result = await createProject(project);

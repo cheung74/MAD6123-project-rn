@@ -17,6 +17,8 @@ const AdminProjectDetails = () => {
       <View style={{ flexDirection: "row" }}>
         <View>
           <Text style={styles.text}>Project name: {item.name}</Text>
+          <Text style={styles.text}>Cost: ${item.cost}</Text>
+
           <Text style={styles.text}>
             Start Date: {getDateString(item.startDate)}
           </Text>
@@ -69,6 +71,7 @@ const AdminProjectDetails = () => {
             <Text style={styles.text}>
               Assignee: {item.assignee.firstName + " " + item.assignee.lastName}{" "}
             </Text>
+            <Text style={styles.text}>Status: {item.status}</Text>
           </View>
         )}
       />

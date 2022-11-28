@@ -39,7 +39,7 @@ const CreateUser = () => {
       type,
       title,
     };
-    console.log(user)
+
     const res = await createUser(user);
     if (res) {
       await navigation.goBack();

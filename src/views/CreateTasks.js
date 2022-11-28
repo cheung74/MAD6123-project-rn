@@ -12,7 +12,7 @@ const CreateTasks = () => {
   const { params } = route;
   const navigation = useNavigation();
   const item = params.item;
-  console.log(item);
+
   const [name, setName] = React.useState("");
   const [desc, setDesc] = React.useState("");
   const [rate, setRate] = React.useState("");
@@ -47,6 +47,8 @@ const CreateTasks = () => {
       desc,
       rate,
       assignee,
+      hour: "0",
+      cost: "0",
       prerequisite: preTask,
       status: "initialized",
     };
