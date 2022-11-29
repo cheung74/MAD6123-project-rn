@@ -6,8 +6,8 @@ import { login as auth } from "../services/auth";
 import { getLocalUserData, storeLocalUserData } from "../storages/asyncStorage";
 
 const Login = () => {
-  const [email, setEmail] = React.useState("admin@admin.com");
-  const [password, setPassword] = React.useState("admin");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const navigation = useNavigation();
 
   React.useEffect(() => {
@@ -35,8 +35,12 @@ const Login = () => {
       if (result) {
         if (_user.type === "admin") {
           await navigation.navigate("RootTab");
+          setEmail("")
+          setPassword("")
         } else {
           await navigation.navigate("UserPage");
+          setEmail("")
+          setPassword("")
         }
       }
     }
